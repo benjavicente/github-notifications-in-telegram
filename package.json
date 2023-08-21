@@ -11,13 +11,14 @@
 		"test": "vitest",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
-		"telegram-bot-dev-mode": "TEST=true vite-node ./src/scripts/telegram-bot-dev-mode.ts"
+		"telegram-bot-dev-mode": "TEST=true vite-node ./src/scripts/telegram-bot-dev-mode.ts",
+		"primsa:generate": "prisma generate --data-proxy"
 	},
 	"devDependencies": {
 		"@octokit/auth-oauth-app": "^7.0.0",
 		"@octokit/oauth-methods": "^4.0.0",
 		"@octokit/webhooks": "^12.0.3",
-		"@sveltejs/adapter-auto": "^2.0.0",
+		"@sveltejs/adapter-cloudflare": "^2.3.2",
 		"@sveltejs/kit": "^1.20.4",
 		"@types/uuid": "^9.0.2",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
