@@ -41,7 +41,7 @@ githubApp.webhooks.on('discussion.created', async ({ payload }) => {
 		const { message_id } = await telegramBot.api.sendMessage(
 			link.telegramLink.telegramChatId,
 			`Nueva discusión de <a href="${payload.sender.html_url}">${payload.sender.login}</a>: <a href="${payload.discussion.html_url}">${payload.discussion.title}</a>`,
-			{ disable_web_page_preview: true }
+			{ parse_mode: 'HTML' }
 		);
 
 		await prisma.gitHubEntityTelegramMessage.create({
@@ -63,7 +63,8 @@ githubApp.webhooks.on('issues.opened', async ({ payload }) => {
 	for (const link of links) {
 		const { message_id } = await telegramBot.api.sendMessage(
 			link.telegramLink.telegramChatId,
-			`Nueva issue de <a href="${payload.issue.user.html_url}">${payload.issue.user.login}</a>: <a href="${payload.issue.html_url}">${payload.issue.title}</a>`
+			`Nueva issue de <a href="${payload.issue.user.html_url}">@${payload.issue.user.login}</a>: <a href="${payload.issue.html_url}">${payload.issue.title}</a>`,
+			{ parse_mode: 'HTML' }
 		);
 
 		await prisma.gitHubEntityTelegramMessage.create({
@@ -90,7 +91,8 @@ githubApp.webhooks.on('issue_comment.created', async ({ payload }) => {
 		await telegramBot.api.editMessageText(
 			msg.linkedGitHubOrg.telegramLink.telegramChatId,
 			msg.telegramMessageId,
-			`Issue de <a href="${payload.issue.user.html_url}">${payload.issue.user.login}</a>: <a href="${payload.issue.html_url}">${payload.issue.title}</a><br>Último comentario de ${payload.comment.user.login}: <a href="${payload.comment.html_url}">${payload.comment.body}</a>`
+			`Issue de <a href="${payload.issue.user.html_url}">@${payload.issue.user.login}</a>: <a href="${payload.issue.html_url}">${payload.issue.title}</a><br>Último comentario de <a href="${payload.comment.user.html_url}">@${payload.comment.user.login}</a>: <a href="${payload.comment.html_url}">${payload.comment.body}</a>`,
+			{ parse_mode: 'HTML' }
 		);
 	}
 });
@@ -100,7 +102,7 @@ githubApp.webhooks.on('discussion_comment.created', async ({ payload }) => {
 
 	const messagesToEdit = await getTelegramLinkedMessages({
 		orgId: payload.organization.id,
-		entityType: 'issue',
+		entityType: 'discussion',
 		entityId: payload.discussion.id
 	});
 
@@ -108,7 +110,8 @@ githubApp.webhooks.on('discussion_comment.created', async ({ payload }) => {
 		await telegramBot.api.editMessageText(
 			msg.linkedGitHubOrg.telegramLink.telegramChatId,
 			msg.telegramMessageId,
-			`Discusión de <a href="${payload.discussion.user.html_url}">${payload.discussion.user.login}</a>: <a href="${payload.discussion.html_url}">${payload.discussion.title}</a><br>Último comentario de ${payload.comment.user.login}: <a href="${payload.comment.html_url}">${payload.comment.body}</a>`
+			`Discusión de <a href="${payload.discussion.user.html_url}">@${payload.discussion.user.login}</a>: <a href="${payload.discussion.html_url}">${payload.discussion.title}</a><br>Último comentario de <a href="${payload.comment.user.html_url}">@${payload.comment.user.login}</a>: <a href="${payload.comment.html_url}">${payload.comment.body}</a>`,
+			{ parse_mode: 'HTML' }
 		);
 	}
 });
