@@ -91,7 +91,7 @@ githubApp.webhooks.on('issue_comment.created', async ({ payload }) => {
 		await telegramBot.api.editMessageText(
 			msg.linkedGitHubOrg.telegramLink.telegramChatId,
 			msg.telegramMessageId,
-			`Issue de <a href="${payload.issue.user.html_url}">@${payload.issue.user.login}</a>: <a href="${payload.issue.html_url}">${payload.issue.title}</a><br>Último comentario de <a href="${payload.comment.user.html_url}">@${payload.comment.user.login}</a>: <a href="${payload.comment.html_url}">${payload.comment.body}</a>`,
+			`Issue de <a href="${payload.issue.user.html_url}">@${payload.issue.user.login}</a>: <a href="${payload.issue.html_url}">${payload.issue.title}</a>\n\nÚltimo comentario de <a href="${payload.comment.user.html_url}">@${payload.comment.user.login}</a>: <a href="${payload.comment.html_url}">${payload.comment.body}</a>`,
 			{ parse_mode: 'HTML' }
 		);
 	}
@@ -110,7 +110,7 @@ githubApp.webhooks.on('discussion_comment.created', async ({ payload }) => {
 		await telegramBot.api.editMessageText(
 			msg.linkedGitHubOrg.telegramLink.telegramChatId,
 			msg.telegramMessageId,
-			`Discusión de <a href="${payload.discussion.user.html_url}">@${payload.discussion.user.login}</a>: <a href="${payload.discussion.html_url}">${payload.discussion.title}</a><br>Último comentario de <a href="${payload.comment.user.html_url}">@${payload.comment.user.login}</a>: <a href="${payload.comment.html_url}">${payload.comment.body}</a>`,
+			`Discusión de <a href="${payload.discussion.user.html_url}">@${payload.discussion.user.login}</a>: <a href="${payload.discussion.html_url}">${payload.discussion.title}</a>\n\nÚltimo comentario de <a href="${payload.comment.user.html_url}">@${payload.comment.user.login}</a>: <a href="${payload.comment.html_url}">${payload.comment.body}</a>`,
 			{ parse_mode: 'HTML' }
 		);
 	}
