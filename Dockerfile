@@ -65,4 +65,4 @@ EXPOSE 3000
 ENV DATABASE_URL="file:///data/sqlite.db"
 ENV PORT=3000
 ENV HOST=0.0.0.0
-CMD [ "node", "build" ]
+CMD [ "node", "build/index.js" ]
