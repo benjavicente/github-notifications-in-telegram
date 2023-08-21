@@ -1,22 +1,17 @@
-import {
-	GITHUB_APP_ID,
-	GITHUB_CLIENT_SECRET,
-	GITHUB_PRIVATE_KEY,
-	GITHUB_WEBHOOK_SECRET
-} from '$env/static/private';
-import { PUBLIC_GITHUB_CLIENT_ID } from '$env/static/public';
+import { env } from '$env/dynamic/private';
+import { env as publicEnv } from '$env/dynamic/public';
 
 import { App } from 'octokit';
 export type { OAuthApp } from 'octokit';
 
 export const githubApp = new App({
-	appId: GITHUB_APP_ID,
+	appId: env.GITHUB_APP_ID ?? '000',
 	oauth: {
-		clientId: PUBLIC_GITHUB_CLIENT_ID,
-		clientSecret: GITHUB_CLIENT_SECRET
+		clientId: publicEnv.PUBLIC_GITHUB_CLIENT_ID,
+		clientSecret: env.GITHUB_CLIENT_SECRET
 	},
-	privateKey: GITHUB_PRIVATE_KEY,
+	privateKey: env.GITHUB_PRIVATE_KEY ?? 'BAD-KEY',
 	webhooks: {
-		secret: GITHUB_WEBHOOK_SECRET
+		secret: env.GITHUB_WEBHOOK_SECRET ?? 'BAD-SECRET'
 	}
 });

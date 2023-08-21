@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
-		"build": "prisma generate --data-proxy && vite build",
+		"build": "vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -12,13 +12,13 @@
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
 		"telegram-bot-dev-mode": "TEST=true vite-node ./src/scripts/telegram-bot-dev-mode.ts",
-		"primsa:generate": "prisma generate --data-proxy"
+		"primsa:generate": "prisma generate"
 	},
 	"devDependencies": {
+		"@flydotio/dockerfile": "^0.4.7",
 		"@octokit/auth-oauth-app": "^7.0.0",
 		"@octokit/oauth-methods": "^4.0.0",
 		"@octokit/webhooks": "^12.0.3",
-		"@sveltejs/adapter-cloudflare": "^2.3.2",
 		"@sveltejs/kit": "^1.20.4",
 		"@types/uuid": "^9.0.2",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
@@ -45,6 +45,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@prisma/client": "5.1.1"
+		"@prisma/client": "5.1.1",
+		"@sveltejs/adapter-node": "^1.3.1"
 	}
 }

@@ -1,8 +1,8 @@
 import { Bot, Keyboard } from 'grammy';
-import { TELEGRAM_TOKEN } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import { prisma } from '../prisma';
 
-export const telegramBot = new Bot(TELEGRAM_TOKEN);
+export const telegramBot = new Bot(env.TELEGRAM_TOKEN ?? 'BAD-TOKEN');
 
 telegramBot.command('start', async (ctx) => {
 	await ctx.reply('👋');
